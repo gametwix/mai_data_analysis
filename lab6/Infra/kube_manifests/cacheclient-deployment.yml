@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cache-client-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cache-client
+  template:
+    metadata:
+      labels:
+        app: cache-client
+    spec:
+      containers:
+      - name: cache-client-service
+        image: maximeremindocker/data_management:latest
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+          requests:
+            memory: "256Mi"
+            cpu: "150m"
+        ports:
+        - containerPort: 5000
+        env:
+          - name: APP_NAME
+            value: "cache_client"
+          - name: APP_HOST
+            value: 0.0.0.0
+          - name: APP_PORT
+            value: "5000"
+          - name: REDIS_HOST
+            value: redis-service
+          - name: REDIS_PORT
+            value: "5000"
+        envFrom:
+        - secretRef:
+            name: test-secrets
+            optional: false

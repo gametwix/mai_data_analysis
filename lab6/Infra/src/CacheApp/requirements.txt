@@ -1,0 +1,4 @@
+redis
+asyncio
+aiohttp_rest_api
+aiohttp

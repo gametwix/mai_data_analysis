@@ -1,0 +1,5 @@
+redis
+asyncio
+aiohttp_rest_api
+aiohttp
+kafka-python

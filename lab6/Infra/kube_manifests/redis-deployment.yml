@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis-service
+        image: redis
+        resources:
+          limits:
+            memory: "768Mi"
+            cpu: "750m"
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6379
+        env:
+          - name: REDIS_REPLICATION_MODE
+            value: master
+      volumes:
+        - name: redis-data
+          emptyDir:
+            {}
+        - name: config
+          configMap: 
+            name: redis-config
+            items: 
+              - key: redis-config
+                path: redis.conf
