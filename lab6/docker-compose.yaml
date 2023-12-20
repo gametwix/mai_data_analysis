@@ -4,11 +4,6 @@ services:
   
   cache_client:
     container_name: cache_client
-    depends_on:
-      - kafka-1
-      - kafka-2
-      - zookeeper-1
-      - zookeeper-2
     build:
       context: "./CacheApp"
       dockerfile: Dockerfile
@@ -23,8 +18,8 @@ services:
       APP_PORT: 6379
       KAFKA_HOST_1: kafka-1 
       KAFKA_HOST_2: kafka-2
-      KAFKA_PORT_1: 29092
-      KAFKA_PORT_2: 39092
+      KAFKA_PORT_1: 9092
+      KAFKA_PORT_2: 9092
   # cache_client2:
   #   container_name: cache_client2
   #   build:

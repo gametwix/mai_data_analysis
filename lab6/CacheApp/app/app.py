@@ -10,7 +10,7 @@ import time
 if __name__ == "__main__":
     logger = getLogger(environ['APP_NAME'])
     logger.setLevel(INFO)
-    time.sleep(10)
+    #time.sleep(10)
     print([environ['KAFKA_HOST_1']+":"+environ['KAFKA_PORT_1'],
                                                     environ['KAFKA_HOST_2']+":"+environ['KAFKA_PORT_2']])
     kafka_client = KafkaProducer(bootstrap_servers=[environ['KAFKA_HOST_1']+":"+environ['KAFKA_PORT_1'],
